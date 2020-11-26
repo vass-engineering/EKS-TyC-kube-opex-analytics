@@ -61,16 +61,16 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - mountPath: /data/
-              name: data-vol
+              name: data-vol-eks
             - mountPath: /koa/static/data/
-              name: static-data-vol
+              name: static-data-vol-eks
       volumes:
-      - name: static-data-vol
+      - name: static-data-vol-eks
         emptyDir: {}
 {{- if .Values.dataVolume.persist }}
   volumeClaimTemplates:
   - metadata:
-      name: data-vol
+      name: data-vol-eks
     spec:
       accessModes:
         - ReadWriteOnce
@@ -81,7 +81,7 @@ spec:
         requests:
           storage: {{ .Values.dataVolume.capacity }}
 {{- else }}
-      - name: data-vol
+      - name: data-vol-eks
         emptyDir: {}
 {{- end }}
       {{- with .Values.nodeSelector }}
