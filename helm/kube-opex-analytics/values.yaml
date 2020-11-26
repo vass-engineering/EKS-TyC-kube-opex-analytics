@@ -49,13 +49,14 @@ ingress:
     cert-manager.io/cluster-issuer: cert-manager-infraapps
   labels: {}
   hosts:
-    - host: kube-opex-analytics.54.73.79.60.xip.io
-      path: /
+    - host: kube-opex-analytics.54.73.79.60.sslip.io
+      paths:
+      - path: /
 # uncomment the following lines and ajust the values to enable TLS
   tls:
   - secretName: kube-opex-analytics-tls
     hosts:
-      - kube-opex-analytics.54.73.79.60.xip.io
+      - kube-opex-analytics.54.73.79.60.sslip.io
 #
 
 
