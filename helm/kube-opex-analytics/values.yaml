@@ -51,7 +51,7 @@ ingress:
   hosts:
     - host: kube-opex-analytics.54.73.79.60.sslip.io
       paths:
-      - path: /
+      - path: "/"
 # uncomment the following lines and ajust the values to enable TLS
   tls:
   - secretName: kube-opex-analytics-tls
