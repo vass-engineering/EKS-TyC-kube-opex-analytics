@@ -77,6 +77,40 @@ resources: {}
 
 nodeSelector: {}
 
-tolerations: []
 
-affinity: {}
+tolerations:
+  - key: "spotInstance"
+    operator: "Equal"
+    value: "true"
+    effect: "PreferNoSchedule"
+  - key: "infra-apps"
+    operator: "Equal"
+    value: "true"
+    effect: "NoExecute"
+  - key: "node.kubernetes.io/unreachable"
+    operator: "Exists"
+    effect: "NoExecute"
+    tolerationSeconds: 120
+  - key: "node.kubernetes.io/not-ready"
+    operator: "Exists"
+    effect: "NoExecute"
+    tolerationSeconds: 120
+
+affinity:
+  nodeAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 1
+      preference:
+        matchExpressions:
+        - key: lifecycle
+          operator: In
+          values:
+          - OnDemand
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: intent
+          operator: In
+          values:
+          - apps
+          - control-apps
