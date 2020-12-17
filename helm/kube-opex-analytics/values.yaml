@@ -54,9 +54,9 @@ ingress:
         - "/"
 # uncomment the following lines and ajust the values to enable TLS
   tls:
-  - secretName: kube-opex-analytics-tls
+  - secretName: kube-opex-analytics-tyc-tls
     hosts:
-      - kube-opex-analytics.tyc.vass.es 
+      - kube-opex-analytics.tyc.vass.es
 #
 
 
